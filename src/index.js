@@ -1,12 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import PlaySound from './play-sound';
+import {playReducer} from './play-reducer'; 
+import './style.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(playReducer);
+class App extends Component {
+  
+  render() {
+    return (
+      <Provider store = {store}>
+        <PlaySound/>
+      </Provider>
+    )
+  };
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+render(<App />, document.getElementById('root'));
